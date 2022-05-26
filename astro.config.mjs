@@ -1,9 +1,10 @@
 import { defineConfig } from 'astro/config';
-
 import preact from "@astrojs/preact";
-import turbolinks from "@astrojs/turbolinks";
+import svelte from "@astrojs/svelte";
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [preact(), turbolinks()]
+  integrations: [preact(), svelte()],
+  adapter: node(),
 });
