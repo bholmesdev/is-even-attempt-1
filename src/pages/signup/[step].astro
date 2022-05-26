@@ -1,0 +1,47 @@
+---
+import { db } from '../../utils/db'
+import Layout from '../../components/Layout.astro'
+
+// TODO: store unique forms by browser session
+let signupForm = await db.signupForm.findFirst()
+
+if (Astro.request.method == 'POST') {
+  const formData = await Astro.request.formData();
+  const name = formData.get('name');
+  const email = formData.get('email');
+
+  if (typeof name === 'string' && typeof email === 'string') {
+    signupForm = await db.signupForm.update({
+      where: { id: signupForm.id },
+      data: {
+        ...signupForm,
+        name,
+        email,
+      }
+    })
+  }
+}
+
+if (!['account', 'profile', 'plan', 'review'].includes(`${Astro.params.step}`)) {
+  Astro.response.status = 404;
+  Astro.response.statusText = 'Not found';
+}
+console.log(signupForm)
+---
+
+{Astro.response.status === 404 ? <p>Not found!</p> : null}
+<Layout title="Sign Up | About Me">
+  <h1>Personal information</h1>
+  <form method="post" action={Astro.request.url}>
+    <label>
+      Name
+      <input type="text" name="name">
+    </label>
+    <label>
+      Email
+      <input type="email" name="email">
+    </label>
+    <button type="submit">Here's ma data!</button>
+  </form>
+  <!-- <pre>{JSON.stringify(form, null, 2)}</pre> -->
+</Layout>
