@@ -2,6 +2,9 @@
   "name": "is-even",
   "version": "0.0.1",
   "private": true,
+  "prisma": {
+    "seed": "node --require esbuild-register prisma/seed.ts"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -18,6 +21,7 @@
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
+    "esbuild-register": "^3.3.2",
     "prisma": "^3.14.0"
   }
 }

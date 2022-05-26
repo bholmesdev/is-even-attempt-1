@@ -6,12 +6,14 @@ specifiers:
   '@astrojs/svelte': ^0.1.3
   '@prisma/client': ^3.14.0
   astro: ^1.0.0-beta.35
+  esbuild-register: ^3.3.2
   preact: ^10.6.5
   prisma: ^3.14.0
   svelte: ^3.46.4
 
 dependencies:
   '@prisma/client': 3.14.0_prisma@3.14.0
+  esbuild-register: 3.3.2
   prisma: 3.14.0
 
 devDependencies:
@@ -1455,6 +1457,12 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /esbuild-register/3.3.2:
+    resolution: {integrity: sha512-jceAtTO6zxPmCfSD5cBb3rgIK1vmuqCKYwgylHiS1BF4pq0jJiJb4K2QMuqF4BEw7XDBRatYzip0upyTzfkgsQ==}
+    peerDependencies:
+      esbuild: '>=0.12 <1'
+    dev: false
 
   /esbuild-sunos-64/0.14.38:
     resolution: {integrity: sha512-2mfIoYW58gKcC3bck0j7lD3RZkqYA7MmujFYmSn9l6TiIcAMpuEvqksO+ntBgbLep/eyjpgdplF7b+4T9VJGOA==}
