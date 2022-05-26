@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "HK Grotesk";
+  src: url("/fonts/hk-grotesk/HKGrotesk-Regular.otf") format("otf");
+}
+@font-face {
+  font-family: "HK Grotesk";
+  font-weight: 700;
+  src: url("/fonts/hk-grotesk/HKGrotesk-Bold.otf") format("otf");
+}
+@font-face {
+  font-family: "HK Grotesk";
+  font-style: italic;
+  src: url("/fonts/hk-grotesk/HKGrotesk-Italic.otf") format("otf");
+}
+@font-face {
+  font-family: "HK Grotesk";
+  font-weight: 700;
+  font-style: italic;
+  src: url("/fonts/hk-grotesk/HKGrotesk-BoldItalic.otf") format("otf");
+}
