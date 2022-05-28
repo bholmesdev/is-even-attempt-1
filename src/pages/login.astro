@@ -1,0 +1,111 @@
+---
+import { db } from '../utils/db'
+import Layout from '../components/Layout.astro'
+import { isEmail, isString } from '../utils/form';
+import Error from '../components/Error.astro';
+
+let errors = {
+  banner: null,
+  username: null,
+  email: null,
+  password: null,
+};
+
+if (Astro.request.method === 'POST') {
+  const formData = await Astro.request.formData()
+  const username = formData.get('username')
+  const email = formData.get('email')
+  const password = formData.get('password')
+  const loginType = formData.get('loginType')
+
+  if (isString(username) && isString(email) && isString(password)) {
+    if (!isEmail(email)) {
+      errors.email = 'Emails must use a valid format (evenStan@example.com)'
+    }
+    if (password.length < 6) {
+      errors.password = 'Passwords must be at least 6 characters long'
+    }
+  } else {
+    errors.banner = "Hm, this response seems invalid. Please try again later."
+  }
+
+  if (Object.values(errors).some(Boolean)) {
+    Astro.response.status = 400
+  }
+
+  if (loginType === 'register') {
+    const userExists = await db.profile.findFirst({ where: { username } })
+    if (userExists) {
+      errors.banner = `Profile with username ${username} already exists! Try logging in.`
+    } else {
+      console.log('creating user...', loginType)
+    }
+  }
+}
+
+const searchParams = new URLSearchParams(Astro.request.url)
+---
+
+<Layout title="Sign Up | About Me">
+  <h1>Personal information</h1>
+  <p>How can we tell you about your number, when we don’t <strong>even</strong> know you!</p>
+  <Error text={errors.banner} />
+
+  <form method="post">
+    <fieldset>
+      <legend>
+        Login or Register?
+      </legend>
+      <label>
+        <input
+          type="radio"
+          name="loginType"
+          value="login"
+          checked
+        />
+        Login
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="loginType"
+          value="register"
+        />
+        Register
+      </label>
+    </fieldset>
+    <input
+      type="hidden"
+      name="redirectTo"
+      value={
+        searchParams.get("redirectTo") ?? undefined
+      }
+    />
+    <label>
+      Username
+      <input type="text" name="username" required>
+      <Error text={errors.username} />
+    </label>
+    <label>
+      Email
+      <input type="email" name="email" required>
+      <Error text={errors.email} />
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required>
+      <Error text={errors.password} />
+    </label>
+    <label>
+      Confirm password
+      <input type="password" name="password" required>
+    </label>
+    <button type="submit">Sign Up</button>
+  </form>
+</Layout>
+
+<style>
+  input {
+    display: block;
+  }
+</style>
