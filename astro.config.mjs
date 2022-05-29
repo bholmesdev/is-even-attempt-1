@@ -7,4 +7,9 @@ import node from "@astrojs/node";
 export default defineConfig({
   integrations: [preact(), svelte()],
   adapter: node(),
+  vite: {
+    ssr: {
+      noExternal: ['open-props'],
+    }
+  }
 });
