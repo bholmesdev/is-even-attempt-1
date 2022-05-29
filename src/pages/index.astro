@@ -9,10 +9,11 @@ import Logo from '../components/Logo.astro';
 		<p class="tagline">Parity checking as a service</p>
 	</header>
 	<main>
-		<form method="POST" action="/signup/account">
+		<form data-swup-form method="POST" action="/signup/account">
 			<input type="number" placeholder="2, 3, 75, etc.">
 			<button type="submit" class="submit-button">Is it even?</button>
 		</form>
+		<a href="/login">Log in</a>
 	</main>
 </Layout>
 

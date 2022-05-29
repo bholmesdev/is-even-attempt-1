@@ -1,4 +1,7 @@
 ---
+import 'open-props/normalize';
+import 'open-props/style';
+
 export interface Props {
 	title: string;
 }
@@ -16,42 +19,57 @@ const { title } = Astro.props as Props;
 	<title>{title}</title>
 </head>
 <body>
-	<slot />
+  <main id="swup">
+    <slot />
+  </main>
+  <script>
+    import Swup from 'swup';
+    import SwupFormsPlugin from '@swup/forms-plugin';
+    import SwupA11yPlugin from '@swup/a11y-plugin';
+    new Swup({
+      plugins: [new SwupFormsPlugin(), new SwupA11yPlugin()],
+    });
+  </script>
 </body>
 </html>
 
 <style>
+
   :root {
-    --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
-		--font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem); 
-    --font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+    --brand-light: hsl(274, 100%, 38%);
 
-    --color-text: hsl(12, 5%, 4%);
-    --color-bg: hsl(270, 100%, 97%);
+    --text1-light: var(--gray-9);
+    --text2-light: var(--gray-8);
 
-    --color-primary: hsl(274, 100%, 38%);
+    --surface1-light: var(--gray-0);
+    --surface2-light: var(--indigo-0);
+
+    --brand: var(--brand-light);
+    --text-1: var(--text1-light);
+    --text-2: var(--text2-light);
+    --surface-1: var(--surface1-light);
+    --surface-2: var(--surface2-light);
   }
 
   html {
-    font-family: 'HK Grotesk', system-ui, sans-serif;
+    font-family: 'HK Grotesk';
     font-size: var(--font-size-base);
     color: var(--color-text);
   }
 
-  body {
-    margin: 0;
+  html, body, main {
+    height: 100%;
   }
 
-  :global(h1) {
-    font-size: var(--font-size-xl);
-  }
-
-  :global(h2) {
-    font-size: var(--font-size-lg);
-  }
-
-  :global(code) {
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+  :global(.visually-hidden) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 </style>
