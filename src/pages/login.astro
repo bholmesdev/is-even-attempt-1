@@ -3,6 +3,8 @@ import { db } from '../utils/db'
 import Layout from '../components/Layout.astro'
 import { isEmail, isString } from '../utils/form';
 import Error from '../components/Error.astro';
+import LoginTabs from './_loginTabs/LoginTabs.svelte';
+import TabPanel from './_loginTabs/TabPanel.svelte';
 
 let errors = {
   banner: null,
@@ -53,29 +55,9 @@ const searchParams = new URLSearchParams(Astro.request.url)
     <Error text={errors.banner} />
   </div>
   <div class="form-bg">
+    <LoginTabs client:load />
+    <TabPanel client:load idx={0}>
     <form method="post">
-      <fieldset>
-        <legend class="visually-hidden">
-          Login or Register?
-        </legend>
-        <label>
-          <input
-            type="radio"
-            name="loginType"
-            value="login"
-            checked
-          />
-          Login
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="loginType"
-            value="register"
-          />
-          Register
-        </label>
-      </fieldset>
       <input
         type="hidden"
         name="redirectTo"
@@ -98,12 +80,40 @@ const searchParams = new URLSearchParams(Astro.request.url)
         <input class="text-input" type="password" name="password" required>
         <Error text={errors.password} />
       </label>
-      <label>
-        Confirm password
-        <input class="text-input" type="password" name="confirmPassword" required>
-      </label>
       <button type="submit">Sign Up</button>
     </form> 
+    </TabPanel>
+    <TabPanel client:load idx={1}>
+      <form method="post">
+        <input
+          type="hidden"
+          name="redirectTo"
+          value={
+            searchParams.get("redirectTo") ?? undefined
+          }
+        />
+        <label>
+          Username
+          <input class="text-input" type="text" name="username" required>
+          <Error text={errors.username} />
+        </label>
+        <label>
+          Email
+          <input class="text-input" type="email" name="email" required>
+          <Error text={errors.email} />
+        </label>
+        <label>
+          Password
+          <input class="text-input" type="password" name="password" required>
+          <Error text={errors.password} />
+        </label>
+        <label>
+          Confirm password
+          <input class="text-input" type="password" name="confirmPassword" required>
+        </label>
+        <button type="submit">Sign Up</button>
+      </form> 
+    </TabPanel>
   </div>
 </Layout>
 
