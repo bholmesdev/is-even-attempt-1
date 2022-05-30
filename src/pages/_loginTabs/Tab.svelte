@@ -1,7 +1,7 @@
 <script>
   import { toTabPanelId, toTabId, tabIdx } from './tab.store'
 
-  export let idx = 0;
+  export let idx = -1;
 </script>
 
 <button
@@ -15,3 +15,18 @@
   on:click={() => tabIdx.set(idx)}>
   <slot />
 </button>
+
+<style>
+  button, button:is(:focus, :hover, :active) {
+    padding: var(--size-2) var(--size-4);
+    background-position-x: 0%;
+    color: var(--brand);
+  }
+  button[aria-selected="false"]:hover {
+    background: var(--indigo-1);
+  }
+  button[aria-selected="true"] {
+    background-position-x: 100%;
+    color: white;
+  }
+</style>

@@ -55,6 +55,7 @@ const searchParams = new URLSearchParams(Astro.request.url)
     <Error text={errors.banner} />
   </div>
   <div class="form-bg">
+    <div class="form-container">
     <LoginTabs client:load />
     <TabPanel client:load idx={0}>
     <form method="post">
@@ -112,8 +113,9 @@ const searchParams = new URLSearchParams(Astro.request.url)
           <input class="text-input" type="password" name="confirmPassword" required>
         </label>
         <button type="submit">Sign Up</button>
-      </form> 
+      </form>
     </TabPanel>
+    </div>
   </div>
 </Layout>
 
@@ -131,13 +133,15 @@ const searchParams = new URLSearchParams(Astro.request.url)
     background: var(--surface-2);
     block-size: 100%;
   }
-  form {
-    background: var(--surface-1);
+  .form-container {
     max-width: 60ch;
     margin: auto;
+    background: var(--surface-1);
     padding-inline: clamp(var(--size-4), 10vw, var(--size-10));
     padding-block-start: var(--size-4);
     padding-block-end: clamp(var(--size-4), 10vw, var(--size-9));
+  }
+  form {
     display: grid;
     gap: var(--size-6);
   }

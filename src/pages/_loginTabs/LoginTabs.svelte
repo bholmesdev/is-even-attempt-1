@@ -20,3 +20,11 @@
   <Tab idx={0}>Login</Tab>
   <Tab idx={1}>Register</Tab>
 </div>
+
+<style>
+  [role="tablist"] {
+    width: max-content;
+    margin: auto;
+    padding-block: var(--size-3);
+  }
+</style>
