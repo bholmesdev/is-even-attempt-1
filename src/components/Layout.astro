@@ -1,6 +1,7 @@
 ---
 import 'open-props/normalize';
 import 'open-props/style';
+import 'open-props/colors-hsl';
 
 export interface Props {
 	title: string;
@@ -42,7 +43,7 @@ const { title } = Astro.props as Props;
     --text2-light: var(--gray-8);
 
     --surface1-light: var(--gray-0);
-    --surface2-light: var(--indigo-0);
+    --surface2-light: hsl(var(--indigo-1-hsl) / 50%);
 
     --brand: var(--brand-light);
     --text-1: var(--text1-light);
@@ -71,5 +72,34 @@ const { title } = Astro.props as Props;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+
+  :global(button) {
+    font-weight: var(--font-weight-7);
+    color: var(--gray-0);
+    padding: var(--size-2);
+    border-radius: var(--radius-2);
+    outline-color: var(--brand);
+    background: linear-gradient(120deg, white 50%, var(--brand) 50%);
+    background-size: 220%;
+    background-position-x: 100%;
+    transition-property: color, background-position-x;
+    transition-duration: 0.3s;
+    transition-timing-function: var(--ease-5);
+  }
+  :global(button:is(:focus, :hover, :active)) {
+    background-position-x: 0%;
+    color: var(--brand);
+  }
+  :global(input:is([type="text"], [type="email"], [type="month"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="url"])) {
+    background: linear-gradient(120deg, white 50%, var(--surface-2) 50%);
+    background-size: 220%;
+    background-position-x: 100%;
+    transition-property: background-position-x;
+    transition-duration: 0.3s;
+    transition-timing-function: var(--ease-5);
+  }
+  :global(input:is([type="text"], [type="email"], [type="month"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="url"]):is(:focus, :hover, :active)) {
+    background-position-x: 0%;
   }
 </style>

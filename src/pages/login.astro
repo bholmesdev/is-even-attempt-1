@@ -116,7 +116,6 @@ const searchParams = new URLSearchParams(Astro.request.url)
   .text-input, button {
     display: block;
     width: 100%;
-    outline-color: var(--brand);
   }
   .form-bg {
     background: var(--surface-2);
@@ -126,7 +125,9 @@ const searchParams = new URLSearchParams(Astro.request.url)
     background: var(--surface-1);
     max-width: 60ch;
     margin: auto;
-    padding: var(--size-4);
+    padding-inline: clamp(var(--size-4), 10vw, var(--size-10));
+    padding-block-start: var(--size-4);
+    padding-block-end: clamp(var(--size-4), 10vw, var(--size-9));
     display: grid;
     gap: var(--size-6);
   }
@@ -138,11 +139,5 @@ const searchParams = new URLSearchParams(Astro.request.url)
   }
   .tagline {
     font-size: var(--font-size-fluid-1);
-  }
-  button[type="submit"] {
-    background-color: var(--brand);
-    color: var(--gray-0);
-    padding: var(--size-2);
-    border-radius: var(--radius-2);
   }
 </style>
