@@ -102,4 +102,7 @@ const { title } = Astro.props as Props;
   :global(input:is([type="text"], [type="email"], [type="month"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="url"]):is(:focus, :hover, :active)) {
     background-position-x: 0%;
   }
+  :global(button) {
+    outline-color: var(--brand);
+  }
 </style>
